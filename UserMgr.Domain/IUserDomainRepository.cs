@@ -1,0 +1,18 @@
+﻿using System;
+using System.Threading.Tasks;
+using UserMgr.Domain.Entities;
+using UserMgr.Domain.ValueObject;
+using Users.Domain.Events;
+
+namespace Users.Domain
+{
+    public interface IUserDomainRepository
+    {
+        Task<User?> FindOneAsync(PhoneNumber phoneNumber);
+        Task<User?> FindOneAsync(Guid userId);
+        Task AddNewLoginHistoryAsync(PhoneNumber phoneNumber, string msg);
+        Task PublishEventAsync(UserAccessResultEvent eventData);
+        Task SavePhoneCodeAsync(PhoneNumber phoneNumber, string code);
+        Task<string?> RetrievePhoneCodeAsync(PhoneNumber phoneNumber);
+    }
+}
